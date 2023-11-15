@@ -1,29 +1,29 @@
-/* eslint-disable react/jsx-no-target-blank */
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from "./components/navbar";
+import Login from "./components/login";
+import SignUp from "./components/signup";
+import Profile from "./components/profile";
+import { RequireToken } from "./components/Auth.js";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Cek Udara , Selamat ngoding.....</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>Tingkat kesehatan saat ini {count} %</button>
-        <p>Semangat ngodingnya kawan...</p>
-      </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </>
+    <div className="app">
+      <Navbar />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route
+            path="/profile"
+            element={
+              <RequireToken>
+                <Profile />
+              </RequireToken>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 
