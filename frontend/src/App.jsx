@@ -1,29 +1,25 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./components/navbar";
-import Login from "./components/login";
-import SignUp from "./components/signup";
-import Profile from "./components/profile";
-import { RequireToken } from "./components/Auth.js";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Dashboard from "./components/Dashboard";
+import Login from "./components/Login";
+import Navbar from "./components/Navbar";
+import Register from "./components/Register";
 
 function App() {
   return (
-    <div className="app">
-      <Navbar />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route
-            path="/profile"
-            element={
-              <RequireToken>
-                <Profile />
-              </RequireToken>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          <Login />
+        </Route>
+        <Route path="/register">
+          <Register />
+        </Route>
+        <Route path="/dashboard">
+          <Navbar />
+          <Dashboard />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 
