@@ -37,3 +37,6 @@ const Users = db.define(
 );
 
 export default Users;
+(async () => {
+  await db.sync();
+})();
