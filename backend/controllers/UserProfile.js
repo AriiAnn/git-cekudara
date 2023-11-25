@@ -4,19 +4,19 @@ import fs from "fs";
 
 export const getUserProfile = async (req, res) => {
   try {
-    const userId = req.user.id; // Mengambil ID pengguna dari token JWT atau sesuai kebutuhan aplikasi Anda
+    const userId = req.user.id;
     const userProfile = await Users.findByPk(userId, {
       attributes: ["id", "name", "email", "profile_image", "full_name", "gender"],
     });
 
     if (!userProfile) {
-      return res.status(404).json({ message: "Profil pengguna tidak ditemukan" });
+      return res.status(404).json({ message: "User profile not found" });
     }
 
     res.json(userProfile);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Terjadi kesalahan saat mengambil profil pengguna" });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
